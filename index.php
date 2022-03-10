@@ -36,6 +36,7 @@ if (!isset($_SESSION["is_logged"])) {
                             <?php $query = $connection->query("SELECT * FROM beasiswa"); while ($row = $query->fetch_assoc()): ?>
                               <li><a href="?page=perhitungan&beasiswa=<?=$row["kd_beasiswa"]?>"><?=$row["nama"]?></a></li>
                             <?php endwhile; ?>
+                            <li><a href="?page=normalisasi">Normalisasi</a></li>
                           </ul>
                         </li>
                         <li class="dropdown">

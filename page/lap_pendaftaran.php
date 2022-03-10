@@ -8,8 +8,8 @@
 	                    <tr>
 	                        <th>No</th>
 	                        <th>NIM</th>
-													<th>Nama</th>
-													<th>Alamat</th>
+							<th>Nama</th>
+							<th>Alamat</th>
 	                        <th>Jenis Kelamin</th>
 	                        <th>Tahun Mengajukan</th>
 	                    </tr>

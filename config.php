@@ -35,3 +35,6 @@ function alert($msg, $to = null) {
   $to = ($to) ? $to : $_SERVER["PHP_SELF"];
   return "<script>alert('{$msg}');window.location='{$to}';</script>";
 }
+
+
+ ?>

@@ -104,8 +104,8 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                <thead>
 	                    <tr>
 	                        <th>No</th>
-													<th>NIM</th>
-													<th>Nama</th>
+							<th>NIM</th>
+							<th>Nama</th>
 	                        <th>Beasiswa</th>
 	                        <th>Kriteria</th>
 	                        <th>Nilai</th>
@@ -118,8 +118,8 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                        <?php while($row = $query->fetch_assoc()): ?>
 	                        <tr>
 	                            <td><?=$no++?></td>
-															<td><?=$row['nim']?></td>
-															<td><?=$row['nama_mahasiswa']?></td>
+								<td><?=$row['nim']?></td>
+								<td><?=$row['nama_mahasiswa']?></td>
 	                            <td><?=$row['nama_beasiswa']?></td>
 	                            <td><?=$row['nama_kriteria']?></td>
 	                            <td><?=$row['nilai']?></td>
