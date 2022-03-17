@@ -10,7 +10,7 @@ if (empty($_SESSION)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Beasiswa</title>
+    <title>Jenis Perhitungan</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <style>
         body {
@@ -23,7 +23,7 @@ if (empty($_SESSION)) {
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">PENGUMUMAN BEASISWA AKAKOM</a>
+                    <a class="navbar-brand" href="#">PENGUMUMAN JENIS PERHITUNGAN</a>
                 </div>
             </div><!-- /.container-fluid -->
         </nav>
@@ -35,9 +35,9 @@ if (empty($_SESSION)) {
 			                <thead>
 			                    <tr>
 			                        <th>No</th>
-			                        <th>NIM</th>
-            									<th>Nama</th>
-            									<th>Beasiswa</th>
+			                        <th>NIS</th>
+            						<th>Nama</th>
+            						<th>Jenis Perhitungan</th>
 			                        <th>Nilai</th>
 			                        <th>Tahun</th>
 			                        <th></th>
@@ -45,13 +45,13 @@ if (empty($_SESSION)) {
 			                </thead>
 			                <tbody>
 			                    <?php $no = 1; ?>
-			                    <?php if ($query = $connection->query("SELECT b.nama AS beasiswa, a.nim, a.nilai, a.tahun, c.nama FROM hasil a JOIN beasiswa b USING(kd_beasiswa) JOIN mahasiswa c ON a.nim=c.nim")): ?>
+			                    <?php if ($query = $connection->query("SELECT b.nama AS jenis, a.nis, a.nilai, a.tahun, c.nama FROM hasil a JOIN jenis b USING(kode) JOIN siswa c ON a.nis=c.nis")): ?>
 			                        <?php while($row = $query->fetch_assoc()): ?>
 			                        <tr>
 			                            <td><?=$no++?></td>
-              										<td><?=$row["nim"]?></td>
+              										<td><?=$row["nis"]?></td>
               										<td><?=$row["nama"]?></td>
-			                            <td><?=$row["beasiswa"]?></td>
+			                            <td><?=$row["jenis"]?></td>
 			                            <td><?=number_format((float) $row["nilai"], 8, '.', '')?></td>
 			                            <td><?=$row['tahun']?></td>
 			                        </tr>

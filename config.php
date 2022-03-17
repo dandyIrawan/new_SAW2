@@ -3,7 +3,7 @@
 /**
  * Database connection setup
  */
-if (!$connection = new Mysqli("localhost", "root", "", "beasiswa_db")) {
+if (!$connection = new Mysqli("localhost", "root", "", "spksaw_db")) {
 // if (!$connection = new Mysqli("mysql.idhostinger.com", "u361711216_bea", "u361711216_bea", "u361711216_bea")) {
   echo "<h3>ERROR: Koneksi database gagal!</h3>";
 }

@@ -10,7 +10,7 @@ if (!isset($_SESSION["is_logged"])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Beasiswa</title>
+    <title>Jenis Perhitungan</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.chained.min.js"></script>
@@ -30,21 +30,15 @@ if (!isset($_SESSION["is_logged"])) {
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="?page=home">Beranda <span class="sr-only">(current)</span></a></li>
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" style="font-weight: bold; color: green;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Perhitungan <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <?php $query = $connection->query("SELECT * FROM beasiswa"); while ($row = $query->fetch_assoc()): ?>
-                              <li><a href="?page=perhitungan&beasiswa=<?=$row["kd_beasiswa"]?>"><?=$row["nama"]?></a></li>
-                            <?php endwhile; ?>
-                            <li><a href="?page=normalisasi">Normalisasi</a></li>
-                          </ul>
-                        </li>
+                        
+                            <li><a href="?page=normalisasi">Perhitungan</a></li>
+                          
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Input <span class="caret"></span></a>
                           <ul class="dropdown-menu">
-                            <li><a href="?page=beasiswa">Data Beasiswa</a></li>
+                            <li><a href="?page=rangking">Data</a></li>
                             <li class="divider"></li>
-                            <li><a href="?page=mahasiswa">Data Mahasiswa</a></li>
+                            <li><a href="?page=siswa">Data Siswa-Siswi</a></li>
                             <li><a href="?page=kriteria">Kriteria</a></li>
                             <li><a href="?page=model">Model</a></li>
                             <li><a href="?page=penilaian">Penilaian</a></li>
@@ -55,8 +49,7 @@ if (!isset($_SESSION["is_logged"])) {
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Laporan <span class="caret"></span></a>
                           <ul class="dropdown-menu">
-                            <li><a href="?page=lap_seluruh">Seluruh Mahasiswa</a></li>
-                            <li><a href="?page=lap_permahasiswa">Per Mahasiswa</a></li>
+                            <li><a href="?page=lap_seluruh">Laporan Siswa-Siswi</a></li>
                             <li><a href="?page=lap_pendaftaran">Pendaftaran</a></li>
                           </ul>
                         </li>

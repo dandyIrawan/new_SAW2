@@ -8,7 +8,7 @@ class Saw
   private $db;
   function __construct()
   {
-    $this->db = new PDO('mysql:host=localhost;dbname=beasiswa_db', "root", "");
+    $this->db = new PDO('mysql:host=localhost;dbname=spksaw_db', "root", "");
     // $this->db = new PDO('mysql:host=mysql.idhostinger.com;dbname=u241789732_putri', "u241789732_root", "39133494");
   }
 
@@ -19,7 +19,7 @@ class Saw
   }
 
   public function get_data_karyawan(){
-    $stmt = $this->db->prepare("SELECT*FROM mahasiswa ORDER BY nim");
+    $stmt = $this->db->prepare("SELECT*FROM siswa ORDER BY nis");
     $stmt->execute();
     return $stmt;
   }
@@ -31,7 +31,7 @@ class Saw
   }
 
   public function get_data_nilai_id($id){
-    $stmt = $this->db->prepare("SELECT*FROM nilai WHERE nim='$id' ORDER BY kd_kriteria");
+    $stmt = $this->db->prepare("SELECT*FROM nilai WHERE nis='$id' ORDER BY kd_kriteria");
     $stmt->execute();
     return $stmt;
   }

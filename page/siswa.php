@@ -1,37 +1,37 @@
 <?php
 $update = (isset($_GET['action']) AND $_GET['action'] == 'update') ? true : false;
 if ($update) {
-	$sql = $connection->query("SELECT * FROM mahasiswa WHERE nim='$_GET[key]'");
+	$sql = $connection->query("SELECT * FROM siswa WHERE nis='$_GET[key]'");
 	$row = $sql->fetch_assoc();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$validasi = false; $err = false;
 	if ($update) {
-		$sql = "UPDATE mahasiswa SET nim='$_POST[nim]', nama='$_POST[nama]', alamat='$_POST[alamat]', jenis_kelamin='$_POST[jenis_kelamin]', tahun_mengajukan='".date("Y")."' WHERE nim='$_GET[key]'";
+		$sql = "UPDATE siswa SET nis='$_POST[nis]', nama='$_POST[nama]', alamat='$_POST[alamat]', jenis_kelamin='$_POST[jenis_kelamin]', tahun_daftar='".date("Y")."' WHERE nis='$_GET[key]'";
 	} else {
-		$sql = "INSERT INTO mahasiswa VALUES ('$_POST[nim]', '$_POST[nama]', '$_POST[alamat]', '$_POST[jenis_kelamin]', '".date("Y")."')";
+		$sql = "INSERT INTO siswa VALUES ('$_POST[nis]', '$_POST[nama]', '$_POST[alamat]', '$_POST[jenis_kelamin]', '".date("Y")."')";
 		$validasi = true;
 	}
 
 	if ($validasi) {
-		$q = $connection->query("SELECT nim FROM mahasiswa WHERE nim=$_POST[nim]");
+		$q = $connection->query("SELECT nis FROM siswa WHERE nis=$_POST[nis]");
 		if ($q->num_rows) {
-			echo alert($_POST["nim"]." sudah terdaftar!", "?page=mahasiswa");
+			echo alert($_POST["nis"]." sudah terdaftar!", "?page=siswa");
 			$err = true;
 		}
 	}
 
   if (!$err AND $connection->query($sql)) {
-    echo alert("Berhasil!", "?page=mahasiswa");
+    echo alert("Berhasil!", "?page=siswa");
   } else {
-		echo alert("Gagal!", "?page=mahasiswa");
+		echo alert("Gagal!", "?page=siswa");
   }
 }
 
 if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
-  $connection->query("DELETE FROM mahasiswa WHERE nim=$_GET[key]");
-	echo alert("Berhasil!", "?page=mahasiswa");
+  $connection->query("DELETE FROM siswa WHERE nis=$_GET[key]");
+	echo alert("Berhasil!", "?page=siswa");
 }
 ?>
 <div class="row">
@@ -41,8 +41,8 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	        <div class="panel-body">
 	            <form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
 	                <div class="form-group">
-	                    <label for="nim">NIM</label>
-	                    <input type="text" name="nim" class="form-control" <?= (!$update) ?: 'value="'.$row["nim"].'"' ?>>
+	                    <label for="nis">NIS</label>
+	                    <input type="text" name="nis" class="form-control" <?= (!$update) ?: 'value="'.$row["nis"].'"' ?>>
 	                </div>
 	                <div class="form-group">
 	                    <label for="nama">Nama Lengkap</label>
@@ -62,7 +62,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 									</div>
 	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "info" ?> btn-block">Simpan</button>
 	                <?php if ($update): ?>
-										<a href="?page=mahasiswa" class="btn btn-info btn-block">Batal</a>
+										<a href="?page=siswa" class="btn btn-info btn-block">Batal</a>
 									<?php endif; ?>
 	            </form>
 	        </div>
@@ -70,13 +70,13 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	</div>
 	<div class="col-md-8">
 	    <div class="panel panel-info">
-	        <div class="panel-heading"><h3 class="text-center">DAFTAR MAHASISWA</h3></div>
+	        <div class="panel-heading"><h3 class="text-center">DAFTAR SISWA-SISWI</h3></div>
 	        <div class="panel-body">
 	            <table class="table table-condensed">
 	                <thead>
 	                    <tr>
 	                        <th>No</th>
-	                        <th>NIM</th>
+	                        <th>NIS</th>
 	                        <th>Nama</th>
 	                        <th>Alamat</th>
 	                        <th>Jenis Kelamin</th>
@@ -86,19 +86,19 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                </thead>
 	                <tbody>
 	                    <?php $no = 1; ?>
-	                    <?php if ($query = $connection->query("SELECT * FROM mahasiswa")): ?>
+	                    <?php if ($query = $connection->query("SELECT * FROM siswa")): ?>
 	                        <?php while($row = $query->fetch_assoc()): ?>
 	                        <tr>
 	                            <td><?=$no++?></td>
-	                            <td><?=$row['nim']?></td>
+	                            <td><?=$row['nis']?></td>
 	                            <td><?=$row['nama']?></td>
 	                            <td><?=$row['alamat']?></td>
 	                            <td><?=$row['jenis_kelamin']?></td>
-	                            <td><?=$row['tahun_mengajukan']?></td>
+	                            <td><?=$row['tahun_daftar']?></td>
 	                            <td>
 	                                <div class="btn-group">
-	                                    <a href="?page=mahasiswa&action=update&key=<?=$row['nim']?>" class="btn btn-warning btn-xs">Edit</a>
-	                                    <a href="?page=mahasiswa&action=delete&key=<?=$row['nim']?>" class="btn btn-danger btn-xs">Hapus</a>
+	                                    <a href="?page=siswa&action=update&key=<?=$row['nis']?>" class="btn btn-warning btn-xs">Edit</a>
+	                                    <a href="?page=siswa&action=delete&key=<?=$row['nis']?>" class="btn btn-danger btn-xs">Hapus</a>
 	                                </div>
 	                            </td>
 	                        </tr>

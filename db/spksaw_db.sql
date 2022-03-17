@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2022 at 05:50 PM
+-- Generation Time: Mar 17, 2022 at 05:03 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -19,26 +19,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `beasiswa_db`
+-- Database: `spksaw_db`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `beasiswa`
---
-
-CREATE TABLE `beasiswa` (
-  `kd_beasiswa` int(11) NOT NULL,
-  `nama` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `beasiswa`
---
-
-INSERT INTO `beasiswa` (`kd_beasiswa`, `nama`) VALUES
-(2, 'Rangking Tertinggi');
 
 -- --------------------------------------------------------
 
@@ -48,8 +30,8 @@ INSERT INTO `beasiswa` (`kd_beasiswa`, `nama`) VALUES
 
 CREATE TABLE `hasil` (
   `kd_hasil` int(11) NOT NULL,
-  `kd_beasiswa` int(11) NOT NULL,
-  `nim` char(9) NOT NULL,
+  `kode` int(11) NOT NULL,
+  `nis` char(9) NOT NULL,
   `nilai` float DEFAULT NULL,
   `tahun` char(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -58,7 +40,7 @@ CREATE TABLE `hasil` (
 -- Dumping data for table `hasil`
 --
 
-INSERT INTO `hasil` (`kd_hasil`, `kd_beasiswa`, `nim`, `nilai`, `tahun`) VALUES
+INSERT INTO `hasil` (`kd_hasil`, `kode`, `nis`, `nilai`, `tahun`) VALUES
 (4, 2, '125610036', 0.95, '2017'),
 (5, 2, '125610080', 0.666667, '2017'),
 (6, 2, '125610076', 0.5, '2017'),
@@ -70,12 +52,30 @@ INSERT INTO `hasil` (`kd_hasil`, `kd_beasiswa`, `nim`, `nilai`, `tahun`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jenis`
+--
+
+CREATE TABLE `jenis` (
+  `kode` int(11) NOT NULL,
+  `nama` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jenis`
+--
+
+INSERT INTO `jenis` (`kode`, `nama`) VALUES
+(2, 'Rangking Tertinggi');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kriteria`
 --
 
 CREATE TABLE `kriteria` (
   `kd_kriteria` int(11) NOT NULL,
-  `kd_beasiswa` int(11) NOT NULL,
+  `kode` int(11) NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `sifat` enum('min','max') DEFAULT NULL,
   `bobot` double NOT NULL
@@ -85,37 +85,10 @@ CREATE TABLE `kriteria` (
 -- Dumping data for table `kriteria`
 --
 
-INSERT INTO `kriteria` (`kd_kriteria`, `kd_beasiswa`, `nama`, `sifat`, `bobot`) VALUES
+INSERT INTO `kriteria` (`kd_kriteria`, `kode`, `nama`, `sifat`, `bobot`) VALUES
 (1, 2, 'Rata Rata Raport', 'max', 0.4),
 (2, 2, 'Tes Tulis', 'max', 0.4),
 (3, 2, 'Prestasi', 'min', 0.2);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mahasiswa`
---
-
-CREATE TABLE `mahasiswa` (
-  `nim` char(9) NOT NULL,
-  `nama` varchar(30) NOT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `jenis_kelamin` enum('Laki-laki','Perempuan') DEFAULT NULL,
-  `tahun_mengajukan` char(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `mahasiswa`
---
-
-INSERT INTO `mahasiswa` (`nim`, `nama`, `alamat`, `jenis_kelamin`, `tahun_mengajukan`) VALUES
-('122112221', 'Dandi Irawan', 'bondowoso', 'Laki-laki', '2022'),
-('12345566', 'ayin cembut', 'bandung', 'Perempuan', '2022'),
-('125610036', 'Anisa Reviana Sakti', 'Jogja', 'Perempuan', '2017'),
-('125610076', 'Heni Nurhidayati', 'palembang', 'Perempuan', '2017'),
-('125610080', 'Nur Afifah Safitri', 'Medan', 'Perempuan', '2017'),
-('125610098', 'Tri Septa Kurnia', 'Kalimantan', 'Perempuan', '2017'),
-('222222', 'fadil', 'bondowoso', 'Laki-laki', '2022');
 
 -- --------------------------------------------------------
 
@@ -125,7 +98,7 @@ INSERT INTO `mahasiswa` (`nim`, `nama`, `alamat`, `jenis_kelamin`, `tahun_mengaj
 
 CREATE TABLE `model` (
   `kd_model` int(11) NOT NULL,
-  `kd_beasiswa` int(11) NOT NULL,
+  `kode` int(11) NOT NULL,
   `kd_kriteria` int(11) NOT NULL,
   `bobot` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -134,7 +107,7 @@ CREATE TABLE `model` (
 -- Dumping data for table `model`
 --
 
-INSERT INTO `model` (`kd_model`, `kd_beasiswa`, `kd_kriteria`, `bobot`) VALUES
+INSERT INTO `model` (`kd_model`, `kode`, `kd_kriteria`, `bobot`) VALUES
 (4, 2, 1, '0.40'),
 (5, 2, 2, '0.40'),
 (6, 2, 3, '0.20');
@@ -147,9 +120,9 @@ INSERT INTO `model` (`kd_model`, `kd_beasiswa`, `kd_kriteria`, `bobot`) VALUES
 
 CREATE TABLE `nilai` (
   `kd_nilai` int(11) NOT NULL,
-  `kd_beasiswa` int(11) DEFAULT NULL,
+  `kode` int(11) DEFAULT NULL,
   `kd_kriteria` int(11) NOT NULL,
-  `nim` char(9) NOT NULL,
+  `nis` char(9) NOT NULL,
   `nilai` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -157,7 +130,7 @@ CREATE TABLE `nilai` (
 -- Dumping data for table `nilai`
 --
 
-INSERT INTO `nilai` (`kd_nilai`, `kd_beasiswa`, `kd_kriteria`, `nim`, `nilai`) VALUES
+INSERT INTO `nilai` (`kd_nilai`, `kode`, `kd_kriteria`, `nis`, `nilai`) VALUES
 (9, 2, 1, '125610036', 3),
 (11, 2, 2, '125610036', 3),
 (12, 2, 3, '125610036', 2),
@@ -209,7 +182,7 @@ INSERT INTO `pengguna` (`kd_pengguna`, `username`, `password`, `status`) VALUES
 
 CREATE TABLE `penilaian` (
   `kd_penilaian` int(11) NOT NULL,
-  `kd_beasiswa` int(11) DEFAULT NULL,
+  `kode` int(11) DEFAULT NULL,
   `kd_kriteria` int(11) NOT NULL,
   `keterangan` varchar(20) NOT NULL,
   `bobot` tinyint(1) DEFAULT NULL
@@ -219,7 +192,7 @@ CREATE TABLE `penilaian` (
 -- Dumping data for table `penilaian`
 --
 
-INSERT INTO `penilaian` (`kd_penilaian`, `kd_beasiswa`, `kd_kriteria`, `keterangan`, `bobot`) VALUES
+INSERT INTO `penilaian` (`kd_penilaian`, `kode`, `kd_kriteria`, `keterangan`, `bobot`) VALUES
 (13, 2, 1, '0 - 50', 1),
 (14, 2, 1, '51 - 70', 2),
 (15, 2, 1, '71 - 90', 3),
@@ -233,37 +206,59 @@ INSERT INTO `penilaian` (`kd_penilaian`, `kd_beasiswa`, `kd_kriteria`, `keterang
 (23, 2, 3, 'Kabupaten', 3),
 (24, 2, 3, 'Tidak Ada', 4);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `siswa`
+--
+
+CREATE TABLE `siswa` (
+  `nis` char(9) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `alamat` varchar(100) DEFAULT NULL,
+  `jenis_kelamin` enum('Laki-laki','Perempuan') DEFAULT NULL,
+  `tahun_daftar` char(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`nis`, `nama`, `alamat`, `jenis_kelamin`, `tahun_daftar`) VALUES
+('102029191', 'blangkon', 'bondowoso', 'Laki-laki', '2022'),
+('122112221', 'Dandi Irawan', 'bondowoso', 'Laki-laki', '2022'),
+('12345566', 'ayin cembut', 'bandung', 'Perempuan', '2022'),
+('125610036', 'Anisa Reviana Sakti', 'Jogja', 'Perempuan', '2017'),
+('125610076', 'Heni Nurhidayati', 'palembang', 'Perempuan', '2017'),
+('125610080', 'Nur Afifah Safitri', 'Medan', 'Perempuan', '2017'),
+('125610098', 'Tri Septa Kurnia', 'Kalimantan', 'Perempuan', '2017'),
+('222222', 'fadil', 'bondowoso', 'Laki-laki', '2022');
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `beasiswa`
---
-ALTER TABLE `beasiswa`
-  ADD PRIMARY KEY (`kd_beasiswa`);
 
 --
 -- Indexes for table `hasil`
 --
 ALTER TABLE `hasil`
   ADD PRIMARY KEY (`kd_hasil`),
-  ADD KEY `fk_mahasiswa` (`nim`),
-  ADD KEY `fk_beasiswa` (`kd_beasiswa`);
+  ADD KEY `fk_mahasiswa` (`nis`),
+  ADD KEY `fk_beasiswa` (`kode`);
+
+--
+-- Indexes for table `jenis`
+--
+ALTER TABLE `jenis`
+  ADD PRIMARY KEY (`kode`);
 
 --
 -- Indexes for table `kriteria`
 --
 ALTER TABLE `kriteria`
   ADD PRIMARY KEY (`kd_kriteria`),
-  ADD KEY `kd_beasiswa` (`kd_beasiswa`),
-  ADD KEY `kd_beasiswa_2` (`kd_beasiswa`);
-
---
--- Indexes for table `mahasiswa`
---
-ALTER TABLE `mahasiswa`
-  ADD PRIMARY KEY (`nim`);
+  ADD KEY `kd_beasiswa` (`kode`),
+  ADD KEY `kd_beasiswa_2` (`kode`);
 
 --
 -- Indexes for table `model`
@@ -271,7 +266,7 @@ ALTER TABLE `mahasiswa`
 ALTER TABLE `model`
   ADD PRIMARY KEY (`kd_model`),
   ADD KEY `fk_kriteria` (`kd_kriteria`),
-  ADD KEY `fk_beasiswa` (`kd_beasiswa`);
+  ADD KEY `fk_beasiswa` (`kode`);
 
 --
 -- Indexes for table `nilai`
@@ -279,8 +274,8 @@ ALTER TABLE `model`
 ALTER TABLE `nilai`
   ADD PRIMARY KEY (`kd_nilai`),
   ADD KEY `fk_kriteria` (`kd_kriteria`),
-  ADD KEY `fk_mahasiswa` (`nim`),
-  ADD KEY `fk_beasiswa` (`kd_beasiswa`);
+  ADD KEY `fk_mahasiswa` (`nis`),
+  ADD KEY `fk_beasiswa` (`kode`);
 
 --
 -- Indexes for table `pengguna`
@@ -294,23 +289,29 @@ ALTER TABLE `pengguna`
 ALTER TABLE `penilaian`
   ADD PRIMARY KEY (`kd_penilaian`),
   ADD KEY `fk_kriteria` (`kd_kriteria`),
-  ADD KEY `fk_beasiswa` (`kd_beasiswa`);
+  ADD KEY `fk_beasiswa` (`kode`);
+
+--
+-- Indexes for table `siswa`
+--
+ALTER TABLE `siswa`
+  ADD PRIMARY KEY (`nis`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `beasiswa`
---
-ALTER TABLE `beasiswa`
-  MODIFY `kd_beasiswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT for table `hasil`
 --
 ALTER TABLE `hasil`
   MODIFY `kd_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `jenis`
+--
+ALTER TABLE `jenis`
+  MODIFY `kode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kriteria`
@@ -350,36 +351,36 @@ ALTER TABLE `penilaian`
 -- Constraints for table `hasil`
 --
 ALTER TABLE `hasil`
-  ADD CONSTRAINT `hasil_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `hasil_ibfk_2` FOREIGN KEY (`kd_beasiswa`) REFERENCES `beasiswa` (`kd_beasiswa`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `hasil_ibfk_1` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `hasil_ibfk_2` FOREIGN KEY (`kode`) REFERENCES `jenis` (`kode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  ADD CONSTRAINT `fk_beasiswa` FOREIGN KEY (`kd_beasiswa`) REFERENCES `beasiswa` (`kd_beasiswa`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_beasiswa` FOREIGN KEY (`kode`) REFERENCES `jenis` (`kode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `model`
 --
 ALTER TABLE `model`
   ADD CONSTRAINT `model_ibfk_1` FOREIGN KEY (`kd_kriteria`) REFERENCES `kriteria` (`kd_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `model_ibfk_2` FOREIGN KEY (`kd_beasiswa`) REFERENCES `beasiswa` (`kd_beasiswa`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `model_ibfk_2` FOREIGN KEY (`kode`) REFERENCES `jenis` (`kode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `nilai`
 --
 ALTER TABLE `nilai`
   ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`kd_kriteria`) REFERENCES `kriteria` (`kd_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`nim`) REFERENCES `mahasiswa` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `nilai_ibfk_3` FOREIGN KEY (`kd_beasiswa`) REFERENCES `beasiswa` (`kd_beasiswa`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`nis`) REFERENCES `siswa` (`nis`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `nilai_ibfk_3` FOREIGN KEY (`kode`) REFERENCES `jenis` (`kode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `penilaian`
 --
 ALTER TABLE `penilaian`
   ADD CONSTRAINT `penilaian_ibfk_1` FOREIGN KEY (`kd_kriteria`) REFERENCES `kriteria` (`kd_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `penilaian_ibfk_2` FOREIGN KEY (`kd_beasiswa`) REFERENCES `beasiswa` (`kd_beasiswa`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `penilaian_ibfk_2` FOREIGN KEY (`kode`) REFERENCES `jenis` (`kode`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

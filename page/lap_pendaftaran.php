@@ -7,24 +7,24 @@
 	                <thead>
 	                    <tr>
 	                        <th>No</th>
-	                        <th>NIM</th>
+	                        <th>NIS</th>
 							<th>Nama</th>
 							<th>Alamat</th>
 	                        <th>Jenis Kelamin</th>
-	                        <th>Tahun Mengajukan</th>
+	                        <th>Tahun</th>
 	                    </tr>
 	                </thead>
 	                <tbody>
 	                    <?php $no = 1; ?>
-	                    <?php if ($query = $connection->query("SELECT * FROM mahasiswa WHERE nim IN(SELECT nim FROM nilai)")): ?>
+	                    <?php if ($query = $connection->query("SELECT * FROM siswa WHERE nis IN(SELECT nis FROM nilai)")): ?>
 	                        <?php while($row = $query->fetch_assoc()): ?>
 	                        <tr>
 	                            <td><?=$no++?></td>
-															<td><?=$row["nim"]?></td>
+								<td><?=$row["nis"]?></td>
 	                            <td><?=$row["nama"]?></td>
 	                            <td><?=$row['alamat']?></td>
 	                            <td><?=$row['jenis_kelamin']?></td>
-	                            <td><?=$row['tahun_mengajukan']?></td>
+	                            <td><?=$row['tahun_daftar']?></td>
 	                        </tr>
 	                        <?php endwhile ?>
 	                    <?php endif ?>
