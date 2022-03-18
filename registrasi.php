@@ -1,24 +1,3 @@
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once "config.php";
-    $sql = "SELECT * FROM pengguna WHERE username='$_POST[username]' AND password='" . md5($_POST['password']) . "'";
-    if ($query = $connection->query($sql)) {
-        if ($query->num_rows) {
-            session_start();
-            while ($data = $query->fetch_array()) {
-                $_SESSION["is_logged"] = true;
-                $_SESSION["as"] = $data["email"];
-                $_SESSION["username"] = $data["username"];
-              }
-            header('location: index.php');
-        } else {
-            echo alert("Username / Password tidak sesuai!", "login.php");
-        }
-    } else {
-        echo "Query error!";
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,9 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="panel panel-info">
-                    <div class="panel-heading"><h3 class="text-center">LOGIN</h3></div>
+                    <div class="panel-heading"><h3 class="text-center">REGISTRASI</h3></div>
                     <div class="panel-body">
-                        <form action="<?=$_SERVER['REQUEST_URI']?>" method="POST">
+                        <form action="simpan-registrasi.php" method="POST">
+                        <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="email">
+                            </div>
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" name="username" class="form-control" id="username" placeholder="username" autofocus="on">
@@ -49,8 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <label for="password">Password</label>
                                 <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                             </div>
-                            <button type="submit" class="btn btn-info btn-block">Login</button><br>
-                            <center>Belum Punya Akun? <a href="registrasi.php">Registrasi</a><center>
+                            <button type="submit" class="btn btn-info btn-block">Daftar</button>
                         </form>
                     </div>
                 </div>
