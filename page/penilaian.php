@@ -34,7 +34,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	echo alert("Berhasil!", "?page=penilaian");
 }
 ?>
-<div class="row">
+	<div class="row">
 	<div class="col-md-4">
 	    <div class="panel panel-<?= ($update) ? "warning" : "info" ?>">
 	        <div class="panel-heading"><h3 class="text-center"><?= ($update) ? "EDIT" : "TAMBAH" ?></h3></div>
@@ -68,7 +68,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                    <label for="bobot">Bobot</label>
 	                    <input type="text" name="bobot" class="form-control" <?= (!$update) ?: 'value="'.$row["bobot"].'"' ?>>
 	                </div>
-	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "info" ?> btn-block">Simpan</button>
+	                <button type="submit" class="btn btn-<?= ($update) ? "success" : "info" ?> btn-block">Simpan</button>
 	                <?php if ($update): ?>
 										<a href="?page=penilaian" class="btn btn-info btn-block">Batal</a>
 									<?php endif; ?>
@@ -103,7 +103,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                            <td><?=$row['bobot']?></td>
 	                            <td>
 	                                <div class="btn-group">
-	                                    <a href="?page=penilaian&action=update&key=<?=$row['kd_penilaian']?>" class="btn btn-warning btn-xs">Edit</a>
+	                                    <a href="?page=penilaian&action=update&key=<?=$row['kd_penilaian']?>" class="btn btn-light btn-xs">Edit</a>
 	                                    <a href="?page=penilaian&action=delete&key=<?=$row['kd_penilaian']?>" class="btn btn-danger btn-xs">Hapus</a>
 	                                </div>
 	                            </td>

@@ -60,7 +60,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 											<option value="Perempuan" <?= (!$update) ?: (($row["jenis_kelamin"] != "Perempuan") ?: 'selected="on"') ?>>Perempuan</option>
 										</select>
 									</div>
-	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "info" ?> btn-block">Simpan</button>
+	                <button type="submit" class="btn btn-<?= ($update) ? "success" : "info" ?> btn-block">Simpan</button>
 	                <?php if ($update): ?>
 										<a href="?page=siswa" class="btn btn-info btn-block">Batal</a>
 									<?php endif; ?>
@@ -97,7 +97,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                            <td><?=$row['tahun_daftar']?></td>
 	                            <td>
 	                                <div class="btn-group">
-	                                    <a href="?page=siswa&action=update&key=<?=$row['nis']?>" class="btn btn-warning btn-xs">Edit</a>
+	                                    <a href="?page=siswa&action=update&key=<?=$row['nis']?>" class="btn btn-light btn-xs">Edit</a>
 	                                    <a href="?page=siswa&action=delete&key=<?=$row['nis']?>" class="btn btn-danger btn-xs">Hapus</a>
 	                                </div>
 	                            </td>
@@ -107,6 +107,6 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                </tbody>
 	            </table>
 	        </div>
-	    </div>
+		</div>
 	</div>
 </div>

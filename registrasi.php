@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <style>
         body {
-            margin-top: 40px;
+            margin-top: 100px;
+            background-image:url(background.jpg); 
+            background-size:cover; 
+            background-attachment: fixed; 
         }
     </style>
 </head>
@@ -21,18 +24,19 @@
                     <div class="panel-body">
                         <form action="simpan-registrasi.php" method="POST">
                         <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" placeholder="email">
-                            </div>
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" name="username" class="form-control" id="username" placeholder="username" autofocus="on">
+                            </div>
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="email">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                             </div>
-                            <button type="submit" class="btn btn-info btn-block">Daftar</button>
+                            <button type="submit" class="btn btn-info btn-block">Daftar</button><br>
+                            <center>Sudah Memiliki Akun? <a href="login.php">Login</a><center>
                         </form>
                     </div>
                 </div>

@@ -64,7 +64,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                    <label for="bobot">Bobot</label>
 	                    <input type="text" name="bobot" class="form-control" <?= (!$update) ?: 'value="'.$row["bobot"].'"' ?>>
 	                </div>
-	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "info" ?> btn-block">Simpan</button>
+	                <button type="submit" class="btn btn-<?= ($update) ? "success" : "info" ?> btn-block">Simpan</button>
 	                <?php if ($update): ?>
 										<a href="?page=model" class="btn btn-info btn-block">Batal</a>
 									<?php endif; ?>
@@ -97,7 +97,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                            <td><?=$row['bobot']?></td>
 	                            <td>
 	                                <div class="btn-group">
-	                                    <a href="?page=model&action=update&key=<?=$row['kd_model']?>" class="btn btn-warning btn-xs">Edit</a>
+	                                    <a href="?page=model&action=update&key=<?=$row['kd_model']?>" class="btn btn-light btn-xs">Edit</a>
 	                                    <a href="?page=model&action=delete&key=<?=$row['kd_model']?>" class="btn btn-danger btn-xs">Hapus</a>
 	                                </div>
 	                            </td>

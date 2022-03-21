@@ -17,6 +17,9 @@ if (!isset($_SESSION["is_logged"])) {
     <style>
         body {
             margin-top: 40px;
+            background-image:url(aa.jpg); 
+            background-size:cover; 
+            background-attachment: fixed; 
         }
     </style>
 </head>
@@ -53,15 +56,21 @@ if (!isset($_SESSION["is_logged"])) {
                             <li><a href="?page=lap_pendaftaran">Pendaftaran</a></li>
                           </ul>
                         </li>
-                        <!-- <li><a href="?page=pengumuman">Pengumuman</a></li> -->
                         <li><a href="logout.php">Logout</a></li>
                         <li><a href="#">|</a></li>
                         <li><a href="#" style="font-weight: bold; color: red;"><?= ucfirst($_SESSION["username"]) ?></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
-        </nav>
-        <div class="row">
+        </nav><!--
+        <div class="box1">
+    <p> &nbsp;&nbsp;<font size="7" color="#ffffff"><b><?php echo $jumlah; ?></b> </font>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;
+    <font size="9" color="#ffffff"><span class="glyphicon glyphicon-user"></span> <br></font>
+    <font size="5" color="#ffffff">&nbsp;Siswa </font><br>
+    <font size="3" color="#ffffff">&nbsp;Telah Didaftarkan </font></p>
+    </p>
+    </div>         -->
+    <div class="row">
             <div class="col-md-12">
               <?php include page($_PAGE); ?>
             </div>

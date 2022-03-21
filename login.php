@@ -28,7 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <style>
         body {
-            margin-top: 40px;
+            margin-top: 100px;
+            background-image:url(background.jpg); 
+            background-size:cover; 
+            background-attachment: fixed; 
         }
     </style>
 </head>
@@ -50,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                             </div>
                             <button type="submit" class="btn btn-info btn-block">Login</button><br>
-                            <center>Belum Punya Akun? <a href="registrasi.php">Registrasi</a><center>
+                            <center>Belum Memiliki Akun? <a href="registrasi.php">Registrasi</a><center>
                         </form>
                     </div>
                 </div>

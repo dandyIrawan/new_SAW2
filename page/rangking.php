@@ -44,7 +44,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                    <label for="nama">Jenis Perhitungan</label>
 	                    <input type="text" name="nama" class="form-control" <?= (!$update) ?: 'value="'.$row["nama"].'"' ?>>
 	                </div>
-	                <button type="submit" class="btn btn-<?= ($update) ? "warning" : "info" ?> btn-block">Simpan</button>
+	                <button type="submit" class="btn btn-<?= ($update) ? "success" : "info" ?> btn-block">Simpan</button>
 	                <?php if ($update): ?>
 										<a href="?page=rangking" class="btn btn-info btn-block">Batal</a>
 									<?php endif; ?>
@@ -73,7 +73,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                            <td><?=$row['nama']?></td>
 	                            <td>
 	                                <div class="btn-group">
-	                                    <a href="?page=rangking&action=update&key=<?=$row['kode']?>" class="btn btn-warning btn-xs">Edit</a>
+	                                    <a href="?page=rangking&action=update&key=<?=$row['kode']?>" class="btn btn-light btn-xs">Edit</a>
 	                                    <a href="?page=rangking&action=delete&key=<?=$row['kode']?>" class="btn btn-danger btn-xs">Hapus</a>
 	                                </div>
 	                            </td>
