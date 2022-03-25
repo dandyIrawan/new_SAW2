@@ -43,7 +43,6 @@ if (!isset($_SESSION["is_logged"])) {
                             <li class="divider"></li>
                             <li><a href="?page=siswa">Data Siswa-Siswi</a></li>
                             <li><a href="?page=kriteria">Kriteria</a></li>
-                            <li><a href="?page=model">Model</a></li>
                             <li><a href="?page=penilaian">Penilaian</a></li>
                             <li class="divider"></li>
                             <li><a href="?page=nilai">Persyaratan</a></li>

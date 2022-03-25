@@ -8,16 +8,16 @@ if ($update) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$validasi = false; $err = false;
 	if ($update) {
-		$sql = "UPDATE kriteria SET kode=$_POST[kode], nama='$_POST[nama]', sifat='$_POST[sifat]' WHERE kd_kriteria='$_GET[key]'";
+		$sql = "UPDATE kriteria SET kode=$_POST[kode], nama='$_POST[nama]', sifat='$_POST[sifat]', bobot='$_POST[bobot]' WHERE kd_kriteria='$_GET[key]'";
 	} else {
-		$sql = "INSERT INTO kriteria VALUES (NULL, $_POST[kode], '$_POST[nama]', '$_POST[sifat]')";
+		$sql = "INSERT INTO kriteria VALUES (NULL, $_POST[kode], '$_POST[nama]', '$_POST[sifat]', '$_POST[bobot]')";
 		$validasi = true;
 	}
 
 	if ($validasi) {
-		$q = $connection->query("SELECT kd_kriteria FROM kriteria WHERE kode=$_POST[kode] AND nama LIKE '%$_POST[nama]%'");
+		$q = $connection->query("SELECT kd_kriteria FROM kriteria WHERE kode=$_POST[kode] AND nama LIKE '%$_POST[nama]%'AND bobot=$_POST[bobot]");
 		if ($q->num_rows) {
-			echo alert("Kriteri sudah ada!", "?page=kriteria");
+			echo alert("Kriteria sudah ada!", "?page=kriteria");
 			$err = true;
 		}
 	}
@@ -43,7 +43,6 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 									<div class="form-group">
 										<label for="kode">Jenis</label>
 										<select class="form-control" name="kode">
-											<option>---</option>
 											<?php $query = $connection->query("SELECT * FROM jenis"); while ($data = $query->fetch_assoc()): ?>
 												<option value="<?=$data["kode"]?>" <?= (!$update) ?: (($row["kode"] != $data["kode"]) ?: 'selected="on"') ?>><?=$data["nama"]?></option>
 											<?php endwhile; ?>
@@ -54,12 +53,12 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                    <input type="text" name="nama" class="form-control" <?= (!$update) ?: 'value="'.$row["nama"].'"' ?>>
 	                </div>
 									<div class="form-group">
-	                  <label for="sifat">Sifat</label>
-										<select class="form-control" name="sifat">
-											<option>---</option>
-											<option value="min" <?= (!$update) ?: (($row["sifat"] != "min") ?: 'selected="on"') ?>>Min</option>
-											<option value="max" <?= (!$update) ?: (($row["sifat"] != "max") ?: 'selected="on"') ?>>Max</option>
-										</select>
+	                    <label for="bobot">Bobot</label>
+	                    <input type="text" name="bobot" class="form-control" <?= (!$update) ?: 'value="'.$row["bobot"].'"' ?>>
+	                </div>
+						<div class="form-group">
+	                  <label for="sifat" ></label>
+					  <input type="hidden" name="sifat" class="form-control" readonly value="max" <?= (!$update) ?: (($row["sifat"] != "max") ?: 'selected="on"') ?>>
 									</div>
 	                <button type="submit" class="btn btn-<?= ($update) ? "success" : "info" ?> btn-block">Simpan</button>
 	                <?php if ($update): ?>
@@ -77,21 +76,21 @@ if (isset($_GET['action']) AND $_GET['action'] == 'delete') {
 	                <thead>
 	                    <tr>
 	                        <th>No</th>
-	                        <th>Jenis Perhitungan</th>
+	                        <th>Kode</th>
 	                        <th>Kriteria</th>
-	                        <th>Sifat</th>
+	                        <th>Bobot</th>
 	                        <th></th>
 	                    </tr>
 	                </thead>
 	                <tbody>
 	                    <?php $no = 1; ?>
-	                    <?php if ($query = $connection->query("SELECT a.nama AS kriteria, b.nama AS jenis, a.kd_kriteria, a.sifat FROM kriteria a JOIN jenis b USING(kode)")): ?>
+	                    <?php if ($query = $connection->query("SELECT a.nama AS kriteria, b.nama AS jenis, a.kd_kriteria, a.sifat, a.bobot FROM kriteria a JOIN jenis b USING(kode)")): ?>
 	                        <?php while($row = $query->fetch_assoc()): ?>
 	                        <tr>
 	                            <td><?=$no++?></td>
-	                            <td><?=$row['jenis']?></td>
+	                            <td>C<?=$row['kd_kriteria']?></td>
 	                            <td><?=$row['kriteria']?></td>
-	                            <td><?=$row['sifat']?></td>
+	                            <td><?=$row['bobot']?></td>
 	                            <td>
 	                                <div class="btn-group">
 	                                    <a href="?page=kriteria&action=update&key=<?=$row['kd_kriteria']?>" class="btn btn-light btn-xs">Edit</a>

@@ -17,8 +17,7 @@ class Saw
     $stmt->execute();
 		return $stmt;
   }
-
-  public function get_data_karyawan(){
+  public function get_data_siswa(){
     $stmt = $this->db->prepare("SELECT*FROM siswa ORDER BY nis");
     $stmt->execute();
     return $stmt;
@@ -29,7 +28,6 @@ class Saw
     $stmt->execute();
 		return $stmt;
   }
-
   public function get_data_nilai_id($id){
     $stmt = $this->db->prepare("SELECT*FROM nilai WHERE nis='$id' ORDER BY kd_kriteria");
     $stmt->execute();

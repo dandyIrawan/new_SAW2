@@ -23,14 +23,14 @@ $saw = new Saw();
   <tbody>
 <?php
 $no = 1;
-$karyawan = $saw->get_data_karyawan();
-while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) { 
+$siswa = $saw->get_data_siswa();
+while ($data_siswa = $siswa->fetch(PDO::FETCH_ASSOC)) { 
 ?>
   <tr>
     <td><?=$no++?></td>
-    <td><?php echo $data_karyawan['nis']; ?></td>
-    <td><?php echo $data_karyawan['nama']; ?></td>
-    <td><?php echo $data_karyawan['alamat']; ?></td>
+    <td><?php echo $data_siswa['nis']; ?></td>
+    <td><?php echo $data_siswa['nama']; ?></td>
+    <td><?php echo $data_siswa['alamat']; ?></td>
   </tr>
 
 <?php } ?>
@@ -66,14 +66,14 @@ while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) {
   <tbody>
   
   <?php
-  $karyawan = $saw->get_data_karyawan();
-  while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) {
+  $siswa = $saw->get_data_siswa();
+  while ($data_siswa = $siswa->fetch(PDO::FETCH_ASSOC)) {
   ?> 
     <tr>
     <td><?=$no++?></td>
-      <td>E<?php echo $data_karyawan['nis']; ?></td>
+      <td>E<?php echo $data_siswa['nis']; ?></td>
       <?php
-      $nilai = $saw->get_data_nilai_id($data_karyawan['nis']);
+      $nilai = $saw->get_data_nilai_id($data_siswa['nis']);
       while ($data_nilai = $nilai->fetch(PDO::FETCH_ASSOC)) { ?>
         <td><?php echo $data_nilai['nilai']; ?></td>
 
@@ -117,16 +117,16 @@ while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) {
   </thead>
   <tbody>
   <?php
-  $karyawan = $saw->get_data_karyawan();
-  while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) {
+  $siswa = $saw->get_data_siswa();
+  while ($data_siswa = $siswa->fetch(PDO::FETCH_ASSOC)) {
   ?>
     <tr>
   <td><?=$no++?></td>
-      <td><?php echo $data_karyawan['nis']; ?></td>
+      <td><?php echo $data_siswa['nis']; ?></td>
       <?php
       // tampilkan nilai dengan nis ...
       $hasil_normalisasi=0;
-      $nilai = $saw->get_data_nilai_id($data_karyawan['nis']);
+      $nilai = $saw->get_data_nilai_id($data_siswa['nis']);
       while ($data_nilai = $nilai->fetch(PDO::FETCH_ASSOC)) {
       //
         $kriteria = $saw->get_data_kriteria_id($data_nilai['kd_kriteria']);
@@ -206,16 +206,16 @@ while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) {
   <tbody>
   <?php
   $hasil_ranks=array();
-  $karyawan = $saw->get_data_karyawan();
-  while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) {
+  $siswa = $saw->get_data_siswa();
+  while ($data_siswa = $siswa->fetch(PDO::FETCH_ASSOC)) {
   ?>
     <tr>
     <td><?=$no++?></td>
-      <td><?php echo $data_karyawan['nis']; ?></td>
+      <td><?php echo $data_siswa['nis']; ?></td>
       <?php
       // tampilkan nilai dengan nis ...
       $hasil_normalisasi=0;
-      $nilai = $saw->get_data_nilai_id($data_karyawan['nis']);
+      $nilai = $saw->get_data_nilai_id($data_siswa['nis']);
       while ($data_nilai = $nilai->fetch(PDO::FETCH_ASSOC)) {
       //
         $kriteria = $saw->get_data_kriteria_id($data_nilai['kd_kriteria']);
@@ -259,7 +259,7 @@ while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) {
         <?php
 
         $hasil_rank['nilai'] = $hasil_normalisasi;
-        $hasil_rank['siswa'] = $data_karyawan['nama'];
+        $hasil_rank['siswa'] = $data_siswa['nama'];
         array_push($hasil_ranks,$hasil_rank);
         echo $hasil_normalisasi; ?>
       </
@@ -290,7 +290,7 @@ while ($data_karyawan = $karyawan->fetch(PDO::FETCH_ASSOC)) {
   <?php
    $no=1;
    rsort($hasil_ranks);
-   foreach ($hasil_ranks as $rank) { ?>
+   foreach ($hasil_ranks as $rank) { ?> 
   <tr>
     <td><?php echo $no++ ?></td>
     <td><?php echo $rank['siswa']; ?></td>

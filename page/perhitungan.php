@@ -3,7 +3,7 @@
 	<?php if (isset($_GET["jenis"])) {
 		$sqlKriteria = "";
 		$namaKriteria = [];
-		$queryKriteria = $connection->query("SELECT a.kd_kriteria, a.nama FROM kriteria a JOIN model b USING(kd_kriteria) WHERE b.kode=$_GET[jenis]");
+		$queryKriteria = $connection->query("SELECT a.kd_kriteria, a.nama FROM kriteria a USING(kd_kriteria) WHERE b.kode=$_GET[jenis]");
 		while ($kr = $queryKriteria->fetch_assoc()) {
 			$sqlKriteria .= "SUM(
 				IF(
@@ -33,7 +33,7 @@
 						nilai.kd_kriteria AS kd_kriteria,
 						kriteria.sifat AS sifat,
 						(
-							SELECT bobot FROM model WHERE kd_kriteria=kriteria.kd_kriteria AND kode=jenis.kode
+							SELECT bobot FROM kriteria WHERE kd_kriteria=kriteria.kd_kriteria AND kode=jenis.kode
 						) AS bobot,
 						ROUND(
 							IF(kriteria.sifat='max', MAX(nilai.nilai), MIN(nilai.nilai)), 1
